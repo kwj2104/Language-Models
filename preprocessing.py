@@ -11,7 +11,7 @@ def PT_preprocessing():
     # http://aclweb.org/anthology/J93-2004
     train, val, test = torchtext.datasets.LanguageModelingDataset.splits(
             path=".", 
-            train="train.txt", validation="valid_short.txt", test="valid_short.txt", text_field=TEXT)
+            train="train.5k.txt", validation="valid_short.txt", test="valid.txt", text_field=TEXT)
 
     #Smaller vocab size for debugging
     TEXT.build_vocab(train, max_size=20)
