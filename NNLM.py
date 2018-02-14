@@ -14,6 +14,7 @@ order = 5
 num_epochs = 5
 learning_rate = .001
 batch_size = 10
+norm=5
 
 #REMOVE AFTER TESTING
 #torch.manual_seed(1)
