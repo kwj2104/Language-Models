@@ -1,4 +1,5 @@
-
+import numpy as np
+from tqdm import tqdm
 import preprocessing as pp
 from collections import Counter
 from itertools import islice
@@ -112,31 +113,32 @@ if __name__ == "__main__":
     
     #Create inputs
     
-#    input_list = []
-#    with open('input.txt') as f:
-#        for line in f:
-#            line_split = line.split()
-#            input_list.append((TEXT.vocab.stoi[line_split[8]], TEXT.vocab.stoi[line_split[9]]))
-#    print(len(input_list))
-#    
-#    predictions = []
-#    for example in tqdm(input_list):
-#        bigram_dist = np.array(get_bigram_dist(bigram_count, unigram_count, example[1]))
-#        trigram_dist = np.array(get_trigram_dist(trigram_count, bigram_count, example[1], example[0]))
-#        unigram_dist = np.array(unigram_dist)
-#        #print(bigram_dist + trigram_dist)
-#        dist = (A_1 * unigram_dist) + (A_2 * bigram_dist)+ (A_3 * trigram_dist)
-#        #print((-dist).argsort()[:20])
-#        #print(np.argpartition(dist, -20)[-20:].tolist())
-#        dist_list = dist.tolist()
-#        pred = [TEXT.vocab.itos[i] for i in dist.argsort()[-20:][::-1].tolist()]
-#        #pred = [TEXT.vocab.itos[i] for i in np.argsort(dist[np.argpartition(dist, -20)[-20:]]).tolist()]
-#        predictions.append(pred)
-#    print(len(predictions))
-#    with open("sample.txt", "w") as fout: 
-#        print("id,word", file=fout)
-#        for i in range(len(input_list)):
-#            print("%d,%s"%(i+1, " ".join(predictions[i])), file=fout)
+    
+    input_list = []
+    with open('input.txt') as f:
+        for line in f:
+            line_split = line.split()
+            input_list.append((TEXT.vocab.stoi[line_split[8]], TEXT.vocab.stoi[line_split[9]]))
+    print(len(input_list))
+    
+    predictions = []
+    for example in tqdm(input_list):
+        bigram_dist = np.array(get_bigram_dist(bigram_count, unigram_count, example[1]))
+        trigram_dist = np.array(get_trigram_dist(trigram_count, bigram_count, example[1], example[0]))
+        unigram_dist = np.array(unigram_dist)
+        #print(bigram_dist + trigram_dist)
+        dist = (A_1 * unigram_dist) + (A_2 * bigram_dist)+ (A_3 * trigram_dist)
+        #print((-dist).argsort()[:20])
+        #print(np.argpartition(dist, -20)[-20:].tolist())
+        dist_list = dist.tolist()
+        pred = [TEXT.vocab.itos[i] for i in dist.argsort()[-20:][::-1].tolist()]
+        #pred = [TEXT.vocab.itos[i] for i in np.argsort(dist[np.argpartition(dist, -20)[-20:]]).tolist()]
+        predictions.append(pred)
+    print(len(predictions))
+    with open("sample.txt", "w") as fout: 
+        print("id,word", file=fout)
+        for i in range(len(input_list)):
+            print("%d,%s"%(i+1, " ".join(predictions[i])), file=fout)
         
 
         
